@@ -1,5 +1,6 @@
 # Project
 .idea
+.vscode
 
 # Node
 node_modules
@@ -25,3 +26,6 @@ npm-debug.log
 
 # Cache
 .awcache
+
+# Build Generated
+vendor
