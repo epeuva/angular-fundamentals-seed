@@ -15,10 +15,16 @@
         <p>{{ numberOne +  numberTwo}} {{ isHappy ? ':)' : ':(' }}</p>
       </div>
       <img [src]="logo" />      
-      <div>
-        <button (click)="handleClick(username.value)">Get value</button>
-        <input type="text" #username>
-        <p>{{ name }}</p>
+      <div>        
+        <input type="text" [value]="name" (input)="handleChange($event.target.value)">
+        
+        <p *ngIf="name.length > 2">Searching for... {{ name }}</p>
+
+        <!-- *ngIf is syntax sugar of  <template [ngIf] -->
+        <!-- see WebComponents or https://developer.mozilla.org/es/docs/Web/HTML/Elemento/template -->
+        <template [ngIf]="name.length > 2">
+           <p>Searching for... {{ name }}</p>
+        </template>
       </div>
     <div>
   `/*,
@@ -31,13 +37,14 @@
     numberOne: number = 1;
     numberTwo: number = 2;
     logo: string =  'img/logo.svg';
-    name: string = 'Todd';
+    name: string = '';
 
     constructor(){
       this.title = 'Ultimate Angular';
     }
 
-    handleClick(value: string){
+    handleChange(value: string){
+      this.name = value;
       console.log('handleClick:', value);
     }
  }
