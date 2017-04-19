@@ -17,7 +17,8 @@
       <img [src]="logo" />      
       <div>
         <button (click)="handleClick()">Change name</button>
-        <input type="text" [value]="name" (blur)="handleBlur($event)" (input)="handleInput($event)">
+        <input type="text" [ngModel]="name" (ngModelChange)="handleChange($event)">
+        <input type="text" [(ngModel)]="name">
         <p>{{ name }}</p>
       </div>
     <div>
@@ -37,13 +38,9 @@
       this.title = 'Ultimate Angular';
     }
 
-    handleBlur(event: any){
-      this.name = event.target.value;
-      console.log('handleBlur:', event);
-    }
-
-    handleInput(event: any){
-      this.name = event.target.value;
+    handleChange(value: string){
+      this.name = value;
+      console.log('handleChange:', event);
     }
 
     handleClick(){
