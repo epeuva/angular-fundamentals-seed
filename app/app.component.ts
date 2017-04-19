@@ -11,12 +11,15 @@
   template: `
     <div class="app">
       <h1 [innerHTML]="title"></h1>
-      <div>{{ numberOne +  numberTwo}}<div>
-      <div>{{ isHappy ? ':)' : ':(' }}<div>
-      <img [src]="logo">
-      <input type="text" [value]="name" >
-      <p>One-way dataflow example:</p>
-      <div>{{ name }}</div>
+      <div>
+        <p>{{ numberOne +  numberTwo}} {{ isHappy ? ':)' : ':(' }}</p>
+      </div>
+      <img [src]="logo" />      
+      <div>
+        <button (click)="handleClick()">Change name</button>
+        <input type="text" [value]="name" (blur)="handleBlur($event)" (input)="handleInput($event)">
+        <p>{{ name }}</p>
+      </div>
     <div>
   `/*,
   //Alternative for templates:
@@ -32,5 +35,19 @@
 
     constructor(){
       this.title = 'Ultimate Angular';
+    }
+
+    handleBlur(event: any){
+      this.name = event.target.value;
+      console.log('handleBlur:', event);
+    }
+
+    handleInput(event: any){
+      this.name = event.target.value;
+    }
+
+    handleClick(){
+      this.name = 'Motto';
+      console.log('handleClick:', event);
     }
  }
