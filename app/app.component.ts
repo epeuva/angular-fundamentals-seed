@@ -1,6 +1,12 @@
- //Component Decorator
- //Function that anotates specific functions
- import { Component } from '@angular/core';
+//Component Decorator
+//Function that anotates specific functions
+import { Component } from '@angular/core';
+
+interface Passenger {
+  id: number,
+  fullName: string,
+  checkedIn: boolean
+}
 
 //Component holds metadata for this particular component
 @Component({
@@ -10,41 +16,106 @@
   // ` backtick ES6 for creating multi-line strings
   template: `
     <div class="app">
-      <h1 [innerHTML]="title"></h1>
-      <div>
-        <p>{{ numberOne +  numberTwo}} {{ isHappy ? ':)' : ':(' }}</p>
-      </div>
-      <img [src]="logo" />      
-      <div>        
-        <input type="text" [value]="name" (input)="handleChange($event.target.value)">
-        
-        <p *ngIf="name.length > 2">Searching for... {{ name }}</p>
+      <h1>Airline Passengers</h1>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+            {{ i }}: {{ passenger.fullName }}
+        </li>
+      </ul>
 
-        <!-- *ngIf is syntax sugar of  <template [ngIf] -->
-        <!-- see WebComponents or https://developer.mozilla.org/es/docs/Web/HTML/Elemento/template -->
-        <template [ngIf]="name.length > 2">
-           <p>Searching for... {{ name }}</p>
-        </template>
-      </div>
+      <h1>Airline Passengers</h1>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+            {{ i }}: {{ passenger.fullName }}
+        </li>
+      </ul>
     <div>
-  `/*,
-  //Alternative for templates:
-  templateUrl: './app.component.html'*/
+  `
 })
- export class AppComponent {   
-    title: string;
-    isHappy: boolean = true;
-    numberOne: number = 1;
-    numberTwo: number = 2;
-    logo: string =  'img/logo.svg';
-    name: string = '';
+export class AppComponent {
+  passengers: Passenger[] = [{
+    id: 1,
+    fullName: 'Earl Campbell',
+    checkedIn: false
+  }, {
+    id: 2,
+    fullName: 'Wanda Flores',
+    checkedIn: true
+  }, {
+    id: 3,
+    fullName: 'Emily Knight',
+    checkedIn: true
+  }, {
+    id: 4,
+    fullName: 'Shawn Howard',
+    checkedIn: true
+  }, {
+    id: 5,
+    fullName: 'Paula Wright',
+    checkedIn: false
+  }, {
+    id: 6,
+    fullName: 'Elizabeth Owens',
+    checkedIn: true
+  }, {
+    id: 7,
+    fullName: 'Debra Johnson',
+    checkedIn: true
+  }, {
+    id: 8,
+    fullName: 'Sean Harris',
+    checkedIn: false
+  }, {
+    id: 9,
+    fullName: 'Helen Grant',
+    checkedIn: true
+  }, {
+    id: 10,
+    fullName: 'Aaron Scott',
+    checkedIn: false
+  }, {
+    id: 11,
+    fullName: 'Douglas Knight',
+    checkedIn: true
+  }, {
+    id: 12,
+    fullName: 'Catherine Owens',
+    checkedIn: true
+  }, {
+    id: 13,
+    fullName: 'Lisa Reyes',
+    checkedIn: false
+  }, {
+    id: 14,
+    fullName: 'Pamela Hudson',
+    checkedIn: true
+  }, {
+    id: 15,
+    fullName: 'Barbara Welch',
+    checkedIn: true
+  }, {
+    id: 16,
+    fullName: 'Harold Richards',
+    checkedIn: false
+  }, {
+    id: 17,
+    fullName: 'Jose Mills',
+    checkedIn: true
+  }, {
+    id: 18,
+    fullName: 'Judith Frazier',
+    checkedIn: true
+  }, {
+    id: 19,
+    fullName: 'Mildred Thomas',
+    checkedIn: false
+  }, {
+    id: 20,
+    fullName: 'Elizabeth Jacobs',
+    checkedIn: true
+  }]
 
-    constructor(){
-      this.title = 'Ultimate Angular';
-    }
+  constructor() {
+  }
 
-    handleChange(value: string){
-      this.name = value;
-      console.log('handleClick:', value);
-    }
- }
+}
