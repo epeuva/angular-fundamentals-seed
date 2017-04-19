@@ -10,7 +10,9 @@
   // ` backtick ES6 for creating multi-line strings
   template: `
     <div class="app">
-      {{title}}
+      <div>{{ title + '!' }}<div>
+      <div>{{ numberOne +  numberTwo}}<div>
+      <div>{{ isHappy ? ':)' : ':(' }}<div>
     <div>
   `/*,
   //Alternative for templates:
@@ -18,6 +20,9 @@
 })
  export class AppComponent {   
     title: string;
+    isHappy: boolean = true;
+    numberOne: number = 1;
+    numberTwo: number = 2;
 
     constructor(){
       this.title = 'Ultimate Angular';
