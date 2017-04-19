@@ -16,9 +16,8 @@
       </div>
       <img [src]="logo" />      
       <div>
-        <button (click)="handleClick()">Change name</button>
-        <input type="text" [ngModel]="name" (ngModelChange)="handleChange($event)">
-        <input type="text" [(ngModel)]="name">
+        <button (click)="handleClick(username.value)">Get value</button>
+        <input type="text" #username>
         <p>{{ name }}</p>
       </div>
     <div>
@@ -38,13 +37,7 @@
       this.title = 'Ultimate Angular';
     }
 
-    handleChange(value: string){
-      this.name = value;
-      console.log('handleChange:', event);
-    }
-
-    handleClick(){
-      this.name = 'Motto';
-      console.log('handleClick:', event);
+    handleClick(value: string){
+      console.log('handleClick:', value);
     }
  }
