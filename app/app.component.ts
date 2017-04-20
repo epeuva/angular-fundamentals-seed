@@ -16,7 +16,7 @@ interface Passenger {
   // ` backtick ES6 for creating multi-line strings
   template: `
     <div class="app">
-      <h1>Airline Passengers (first method)</h1>
+      <h1>Airline Passengers (first method - class.checked-in)</h1>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
           <span class="status" [class.checked-in]="passenger.checkedIn"></span>
@@ -24,10 +24,26 @@ interface Passenger {
         </li>
       </ul>
       <div> ----- </div>
-      <h1>Airline Passengers (second method)</h1>
+      <h1>Airline Passengers (second method - ngClass)</h1>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
           <span class="status" [ngClass]="{'checked-in':passenger.checkedIn, 'checked-out':!passenger.checkedIn}"></span>
+          {{ i }}: {{ passenger.fullName }}
+        </li>
+      </ul>
+      <div> ----- </div>
+      <h1>Airline Passengers (third method - style.backgroundColor #XXX)</h1>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span class="status" [style.backgroundColor]="(passenger.checkedIn ? '#2ecc71' : '#c0392b')"></span>
+          {{ i }}: {{ passenger.fullName }}
+        </li>
+      </ul>
+      <div> ----- </div>
+      <h1>Airline Passengers (fourth method - ngStyle #XXX)</h1>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          <span class="status" [ngStyle]="{backgroundColor:(passenger.checkedIn ? '#2ecc71' : '#c0392b')}"></span>
           {{ i }}: {{ passenger.fullName }}
         </li>
       </ul>
