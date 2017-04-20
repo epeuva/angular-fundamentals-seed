@@ -16,17 +16,19 @@ interface Passenger {
   // ` backtick ES6 for creating multi-line strings
   template: `
     <div class="app">
-      <h1>Airline Passengers</h1>
+      <h1>Airline Passengers (first method)</h1>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
-            {{ i }}: {{ passenger.fullName }}
+          <span class="status" [class.checked-in]="passenger.checkedIn"></span>
+          {{ i }}: {{ passenger.fullName }}
         </li>
       </ul>
-
-      <h1>Airline Passengers</h1>
+      <div> ----- </div>
+      <h1>Airline Passengers (second method)</h1>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
-            {{ i }}: {{ passenger.fullName }}
+          <span class="status" [ngClass]="{'checked-in':passenger.checkedIn, 'checked-out':!passenger.checkedIn}"></span>
+          {{ i }}: {{ passenger.fullName }}
         </li>
       </ul>
     <div>
@@ -73,46 +75,6 @@ export class AppComponent {
     id: 10,
     fullName: 'Aaron Scott',
     checkedIn: false
-  }, {
-    id: 11,
-    fullName: 'Douglas Knight',
-    checkedIn: true
-  }, {
-    id: 12,
-    fullName: 'Catherine Owens',
-    checkedIn: true
-  }, {
-    id: 13,
-    fullName: 'Lisa Reyes',
-    checkedIn: false
-  }, {
-    id: 14,
-    fullName: 'Pamela Hudson',
-    checkedIn: true
-  }, {
-    id: 15,
-    fullName: 'Barbara Welch',
-    checkedIn: true
-  }, {
-    id: 16,
-    fullName: 'Harold Richards',
-    checkedIn: false
-  }, {
-    id: 17,
-    fullName: 'Jose Mills',
-    checkedIn: true
-  }, {
-    id: 18,
-    fullName: 'Judith Frazier',
-    checkedIn: true
-  }, {
-    id: 19,
-    fullName: 'Mildred Thomas',
-    checkedIn: false
-  }, {
-    id: 20,
-    fullName: 'Elizabeth Jacobs',
-    checkedIn: true
   }]
 
   constructor() {
