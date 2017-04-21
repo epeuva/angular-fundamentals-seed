@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
 interface Passenger {
   id: number,
   fullName: string,
-  checkedIn: boolean
+  checkedIn: boolean,
+  checkInDate?: number
 }
 
 //Component holds metadata for this particular component
@@ -21,30 +22,12 @@ interface Passenger {
         <li *ngFor="let passenger of passengers; let i = index;">
           <span class="status" [class.checked-in]="passenger.checkedIn"></span>
           {{ i }}: {{ passenger.fullName }}
-        </li>
-      </ul>
-      <div> ----- </div>
-      <h1>Airline Passengers (second method - ngClass)</h1>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          <span class="status" [ngClass]="{'checked-in':passenger.checkedIn, 'checked-out':!passenger.checkedIn}"></span>
-          {{ i }}: {{ passenger.fullName }}
-        </li>
-      </ul>
-      <div> ----- </div>
-      <h1>Airline Passengers (third method - style.backgroundColor #XXX)</h1>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          <span class="status" [style.backgroundColor]="(passenger.checkedIn ? '#2ecc71' : '#c0392b')"></span>
-          {{ i }}: {{ passenger.fullName }}
-        </li>
-      </ul>
-      <div> ----- </div>
-      <h1>Airline Passengers (fourth method - ngStyle #XXX)</h1>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          <span class="status" [ngStyle]="{backgroundColor:(passenger.checkedIn ? '#2ecc71' : '#c0392b')}"></span>
-          {{ i }}: {{ passenger.fullName }}
+
+          <p>JSON Pipe: {{ passenger | json}}</p>
+          <div class="date">
+            Check in date:
+            {{ passenger.checkInDate ? (passenger.checkInDate | date: 'd MMMM y' | uppercase) : 'Not checked in'}}
+          </div>
         </li>
       </ul>
     <div>
@@ -54,43 +37,53 @@ export class AppComponent {
   passengers: Passenger[] = [{
     id: 1,
     fullName: 'Earl Campbell',
-    checkedIn: false
+    checkedIn: false,
+    checkInDate: 1492762309363
   }, {
     id: 2,
     fullName: 'Wanda Flores',
-    checkedIn: true
+    checkedIn: true,
+        checkInDate: 1492722309363
   }, {
     id: 3,
     fullName: 'Emily Knight',
-    checkedIn: true
+    checkedIn: true,
+    checkInDate: 1492622309363
   }, {
     id: 4,
     fullName: 'Shawn Howard',
-    checkedIn: true
+    checkedIn: true,
+    checkInDate: 1492522309363
   }, {
     id: 5,
     fullName: 'Paula Wright',
-    checkedIn: false
+    checkedIn: false,
+    checkInDate: null
   }, {
     id: 6,
     fullName: 'Elizabeth Owens',
-    checkedIn: true
+    checkedIn: true,
+    checkInDate: 1492322309363
   }, {
     id: 7,
     fullName: 'Debra Johnson',
-    checkedIn: true
+    checkedIn: true,
+    checkInDate: 1492122309363
   }, {
     id: 8,
     fullName: 'Sean Harris',
-    checkedIn: false
+    checkedIn: false,
+    checkInDate: 1491922309363
   }, {
     id: 9,
     fullName: 'Helen Grant',
-    checkedIn: true
+    checkedIn: true,
+    checkInDate: 1491622309363
   }, {
     id: 10,
     fullName: 'Aaron Scott',
-    checkedIn: false
+    checkedIn: false,
+    checkInDate: 1491222309363
   }]
 
   constructor() {
