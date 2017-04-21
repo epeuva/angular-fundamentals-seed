@@ -7,7 +7,7 @@ import { Passenger } from './../../modules/passenger.interface';
   styleUrls: ['passenger-dashboard.component.scss'],
   template: `
     <div class="passenger-dashboard">
-      <passenger-count></passenger-count>
+      <passenger-count [items]="passengers"></passenger-count>
       <passenger-detail></passenger-detail>
       <h1>Airline Passengers (first method - class.checked-in)</h1>
       <ul>
