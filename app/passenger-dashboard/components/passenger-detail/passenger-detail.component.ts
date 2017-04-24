@@ -14,10 +14,6 @@ import { Component, Input, Output, EventEmitter, OnChanges, OnInit  } from '@ang
       <div class="date">
         {{ detail.checkInDate ? (detail.checkInDate | date: 'd MMMM y' | uppercase) : 'Not checked in'}}
       </div>
-      <div class="children">
-        <!-- Safety check object properties  -->
-        Children (Safe navigation operator [?]): {{ detail.children?.length || 0}}
-      </div>
       <button (click)="toogleEdit()">
         {{ editing ? 'Done' : 'Edit' }}
       </button>
