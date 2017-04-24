@@ -36,6 +36,8 @@ export class PassengerDashboardComponent implements OnInit {
       .getPassengers()
       .subscribe((data: Passenger[]) => {
         this.passengers = data;
+      }, (error: any) => {
+        console.log('ngOnInit getPassengers error:', error);
       })
 
     /*

@@ -4,7 +4,8 @@ import { Passenger } from './modules/passenger.interface';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
@@ -21,6 +22,9 @@ export class PassengerDashboardService {
       .get(PASSENGER_API)
       .map((response: Response) => {
         return response.json();
+      })
+      .catch((error: any) => {
+        return Observable.throw(error.json());
       })
   }
 
