@@ -7,6 +7,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+//toPromise example
+import 'rxjs/add/operator/toPromise';
+
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
 const PASSENGER_API: string = '/api/passengers'
@@ -52,6 +55,19 @@ export class PassengerDashboardService {
         return response.json();
       })
   }
+
+  getPassenger(id: number): Observable<Passenger> {
+    return this.http
+      .get(`${PASSENGER_API}/${id}`)
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((error: any) => {
+        return Observable.throw(error.json());
+      })
+  }
+
+
 
   //change subscribe for then to the caller function.
   getPassengersByPromise(): Promise<Passenger[]> {

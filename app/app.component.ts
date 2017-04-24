@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
   // ` backtick ES6 for creating multi-line strings
   template: `
     <div class="app">
-      <passenger-dashboard></passenger-dashboard>
+      <passenger-viewer></passenger-viewer>
     <div>
   `
 })
