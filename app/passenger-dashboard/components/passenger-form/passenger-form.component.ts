@@ -15,6 +15,7 @@ import { Passenger } from './../../modules/passenger.interface';
         Passenger Id: <input type="number" name="id" [ngModel]="detail?.id">
       </div>
       <div>
+         Checked In (using radios):
         <label>
           <input type="radio" name="checkedIn" [value]="true" [ngModel]="detail?.checkedIn" (ngModelChange)="toggleCheckIn($event)"> Yes
         </label>
@@ -22,6 +23,15 @@ import { Passenger } from './../../modules/passenger.interface';
           <input type="radio" name="checkedIn" [value]="false" [ngModel]="detail?.checkedIn" (ngModelChange)="toggleCheckIn($event)"> No
         </label>
       </div>
+
+      <div>
+        <label>
+          Checked In (using checkbox):
+          <input type="checkbox" name="checkedIn" [ngModel]="detail?.checkedIn" (ngModelChange)="toggleCheckIn($event)">
+        </label>
+      </div>
+
+
       <div *ngIf="form.value.checkedIn">
         Check in date: <input type="number" name="checkInDate" [ngModel]="detail?.checkInDate">
       </div>
