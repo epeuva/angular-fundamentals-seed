@@ -5,7 +5,7 @@ import { Passenger } from './modules/passenger.interface';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Http, Response } from '@angular/http'
+import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
 const PASSENGER_API: string = '/api/passengers'
 
@@ -24,8 +24,17 @@ export class PassengerDashboardService {
   }
 
   updatePassenger(passenger: Passenger): Observable<Passenger> {
+
+    //Not needed but added just as an example of Request Options
+    let options = new RequestOptions({
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+
+
     return this.http
-      .put(`${PASSENGER_API}/${passenger.id}`, passenger)
+      .put(`${PASSENGER_API}/${passenger.id}`, passenger, options)
       .map((response: Response) => {
         return response.json();
       })
