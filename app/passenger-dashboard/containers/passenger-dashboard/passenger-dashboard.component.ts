@@ -8,7 +8,13 @@ import { Passenger } from './../../modules/passenger.interface';
   template: `
     <div class="passenger-dashboard">
       <passenger-count [items]="passengers"></passenger-count>
-      <passenger-detail *ngFor="let passenger of passengers;" [detail]="passenger"></passenger-detail>
+      <passenger-detail
+        *ngFor="let passenger of passengers;"
+        [detail]="passenger"
+        (remove)="handleRemove($event)"
+        (edit)="handleEdit($event)"
+      >
+      </passenger-detail>
     </div>
   `
 })
@@ -83,4 +89,13 @@ export class PassengerDashboardComponent implements OnInit {
       children: null
     }]
   }
+
+  handleRemove(event) {
+    console.log('handleRemove', event);
+  }
+
+  handleEdit(event) {
+    console.log('handleEdit', event);
+  }
+
 }
