@@ -48,14 +48,14 @@ export class PassengerDetailComponent {
 
   toogleEdit() {
     if(this.editing) {
+      console.log('Emiting toogleEdit event', this.detail);
       this.edit.emit(this.detail);
     }
     this.editing = !this.editing;
   }
 
   onRemove() {
-    console.log('Emiting onRemove event', this.detail)
+    console.log('Emiting onRemove event', this.detail);
     this.remove.emit(this.detail);
   }
-
 }
