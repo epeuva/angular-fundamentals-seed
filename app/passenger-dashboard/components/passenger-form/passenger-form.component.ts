@@ -6,9 +6,15 @@ import { Passenger } from './../../modules/passenger.interface';
   selector: 'passenger-form',
   styleUrls: ['passenger-form.component.scss'],
   template: `
-    <form>
-      Form ! <br>
+    <form #form="ngForm" novalidate>
       {{ detail | json}}
+      <div>
+        Passenger name: <input type="text" name="fullName" [ngModel]="detail?.fullName">
+      </div>
+      <div>
+        Passenger Id: <input type="number" name="id" [ngModel]="detail?.id">
+      </div>
+      {{ form.value | json }}
     </form>
   `
 })
