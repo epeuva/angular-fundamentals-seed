@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PassengerDashboardService } from './../../passenger-dashboard.service';
+
 import { Passenger } from './../../modules/passenger.interface';
 
 @Component({
@@ -24,91 +26,58 @@ import { Passenger } from './../../modules/passenger.interface';
 export class PassengerDashboardComponent implements OnInit {
   passengers: Passenger[];
 
-  constructor() {
+  constructor(private passengerService: PassengerDashboardService) {
 
   }
 
   ngOnInit() {
     console.log('ngOnInit');
-    this.passengers = [{
-      id: 1,
-      fullName: 'Earl Campbell',
-      checkedIn: false,
-      checkInDate: 1492762309363,
-      children: null
-    }, {
-      id: 2,
-      fullName: 'Wanda Flores',
-      checkedIn: true,
-      checkInDate: 1492722309363,
-      children: [{ name: 'Lorem', age: 20 }, { name: 'Ipsum', age: 7 }]
-    }, {
-      id: 3,
-      fullName: 'Emily Knight',
-      checkedIn: true,
-      checkInDate: 1492622309363,
-      children: null
-    }, {
-      id: 4,
-      fullName: 'Shawn Howard',
-      checkedIn: true,
-      checkInDate: 1492522309363,
-      children: [{ name: 'Sit', age: 30 }]
-    }, {
-      id: 5,
-      fullName: 'Paula Wright',
-      checkedIn: false,
-      checkInDate: null,
-      children: null
-    }, {
-      id: 6,
-      fullName: 'Elizabeth Owens',
-      checkedIn: true,
-      checkInDate: 1492322309363,
-      children: null
-    }, {
-      id: 7,
-      fullName: 'Debra Johnson',
-      checkedIn: true,
-      checkInDate: 1492122309363,
-      children: [{ name: 'Amet', age: 25 }]
-    }, {
-      id: 8,
-      fullName: 'Sean Harris',
-      checkedIn: false,
-      checkInDate: 1491922309363,
-      children: null
-    }, {
-      id: 9,
-      fullName: 'Helen Grant',
-      checkedIn: true,
-      checkInDate: 1491622309363,
-      children: null
-    }, {
-      id: 10,
-      fullName: 'Aaron Scott',
-      checkedIn: false,
-      checkInDate: 1491222309363,
-      children: null
-    }]
+    this.passengerService
+      .getPassengers()
+      .subscribe((data: Passenger[]) => {
+        this.passengers = data;
+      }, (error: any) => {
+        console.log('ngOnInit getPassengers error:', error);
+      })
+
+    /*
+    //Promise Example
+    this.passengerService
+      .getPassengersByPromise()
+      .then((data: Passenger[]) => {
+        this.passengers = data;
+      })
+    */
   }
 
   handleRemove(event: Passenger) {
     console.log('handleRemove', event);
-    this.passengers = this.passengers.filter( (passenger:Passenger) => {
-      return passenger.id !== event.id;
-    })
+     this.passengerService
+      .removePassenger(event)
+      .subscribe((data:Passenger) => {
+        console.log('handleRemove.subscribe', data);
+        this.passengers = this.passengers.filter( (passenger:Passenger) => {
+          return passenger.id !== event.id;
+        })
+      });
   }
 
   handleEdit(event: Passenger) {
     console.log('handleEdit', event);
-    this.passengers = this.passengers.map( (passenger: Passenger) => {
-      if(passenger.id === event.id){
-        //Immutable way of editing.
-        passenger = Object.assign({}, passenger, event);
-      }
-      return passenger;
-    })
+    this.passengerService
+      .updatePassenger(event)
+      .subscribe((data:Passenger) => {
+        console.log('handleEdit.subscribe', data);
+
+        this.passengers = this.passengers.map( (passenger: Passenger) => {
+          if(passenger.id === event.id){
+            //Immutable way of editing.
+            passenger = Object.assign({}, passenger, event);
+          }
+          return passenger;
+        });
+      });
+
     console.log(this.passengers);
   }
 
