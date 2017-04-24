@@ -1,5 +1,5 @@
 import { Passenger } from './../../modules/passenger.interface';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, OnInit  } from '@angular/core';
 
 @Component({
   selector: 'passenger-detail',
@@ -27,7 +27,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     </div>
   `
 })
-export class PassengerDetailComponent {
+export class PassengerDetailComponent  implements OnChanges, OnInit {
 
   @Input()
   detail: Passenger;
@@ -41,6 +41,19 @@ export class PassengerDetailComponent {
   editing: boolean = false;
 
   constructor(){}
+
+  //ngOnChanges executes before ngOnInit. Binding data is set-up before the component is initialized
+  //(we clone the object to avoid updating parent data when we don't want it).
+  ngOnChanges(changes) {
+    if(changes.detail){
+      this.detail = Object.assign({}, changes.detail.currentValue)
+    }
+    console.log('ngOnChanges', changes);
+  }
+
+  ngOnInit() {
+    console.log('ngOnInit');
+  }
 
   onNameChange(value: string) {
     this.detail.fullName = value;
