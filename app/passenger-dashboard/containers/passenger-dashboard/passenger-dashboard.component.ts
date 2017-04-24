@@ -8,24 +8,7 @@ import { Passenger } from './../../modules/passenger.interface';
   template: `
     <div class="passenger-dashboard">
       <passenger-count [items]="passengers"></passenger-count>
-      <passenger-detail></passenger-detail>
-      <h1>Airline Passengers (first method - class.checked-in)</h1>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          <span class="status" [class.checked-in]="passenger.checkedIn"></span>
-          {{ i }}: {{ passenger.fullName }}
-
-          <p>JSON Pipe: {{ passenger | json}}</p>
-          <div class="date">
-            Check in date (pipe chaining):
-            {{ passenger.checkInDate ? (passenger.checkInDate | date: 'd MMMM y' | uppercase) : 'Not checked in'}}
-          </div>
-          <div class="children">
-            <!-- Safety check object properties  -->
-            Children (Safe navigation operator [?]): {{ passenger.children?.length || 0}}
-          </div>
-        </li>
-      </ul>
+      <passenger-detail *ngFor="let passenger of passengers;" [detail]="passenger"></passenger-detail>
     </div>
   `
 })
