@@ -4,6 +4,7 @@ import { Passenger } from './modules/passenger.interface';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
@@ -44,6 +45,36 @@ export class PassengerDashboardService {
     return this.http
       .delete(`${PASSENGER_API}/${passenger.id}`)
       .map((response: Response) => {
+        return response.json();
+      })
+  }
+
+  //change subscribe for then to the caller function.
+  getPassengersByPromise(): Promise<Passenger[]> {
+    return this.http
+      .get(PASSENGER_API)
+      .toPromise()
+      .then((response: Response) => {
+        return response.json();
+      })
+  }
+
+  //change subscribe for then to the caller function.
+  updatePassengerByPromise(passenger: Passenger): Promise<Passenger> {
+    return this.http
+      .put(`${PASSENGER_API}/${passenger.id}`, passenger)
+      .toPromise()
+      .then((response: Response) => {
+        return response.json();
+      })
+  }
+
+  //change subscribe for then to the caller function.
+  removePassengerByPromise(passenger: Passenger): Promise<Passenger> {
+    return this.http
+      .delete(`${PASSENGER_API}/${passenger.id}`)
+      .toPromise()
+      .then((response: Response) => {
         return response.json();
       })
   }
