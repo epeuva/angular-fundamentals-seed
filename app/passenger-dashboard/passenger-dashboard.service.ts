@@ -1,7 +1,16 @@
+import { Injectable } from '@angular/core';
+
 import { Passenger } from './modules/passenger.interface';
 
+import { Http } from '@angular/http'
+
+
+//this tells Angular that we can inject things into its constructor (DI)
+@Injectable()
 export class PassengerDashboardService {
-  constructor(){}
+  constructor(private http: Http){
+    console.log(this.http);
+  }
 
   getPassengers(): Passenger[] {
     return [{
